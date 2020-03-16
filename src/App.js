@@ -17,16 +17,48 @@ function App() {
   let [ballOn, setBallOn] = useState(50);
   const [Quater, setQuater] = useState(1);
  
-function hitHundred(){
-  let initialized = setBallOn(50);
-  console.log("TOUCH TOWN!!!!!")
-  return initialized
-}
-function getRandomInt(min, max) {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
-}
+  const [seconds, setSeconds] = useState(59); 
+  const [minutes, setMinutes] = useState(15); 
+
+  setTimeout(() => {
+    setSeconds(seconds - 1);
+    if (seconds === 0){
+      setSeconds(59);
+      setMinutes(minutes - 1)
+    
+      if (minutes === 0 && seconds === 0){
+        setQuater(Quater + 1)
+
+        if (Quater > 4){
+          setQuater(1)
+          setMinutes(15)
+          setSeconds(59)
+        }
+      }
+    }
+  }, 1000)
+
+
+
+  function hitHundred(){
+    let initialized = setBallOn(50);
+    console.log("TOUCH TOWN!!!!!")
+    return initialized
+  }
+  function getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    let randomInt =  Math.floor(Math.random() * (max - min)) + min;
+    setTogo(toGo - randomInt)
+    if (toGo <= 0){
+      setTogo(10)
+    }
+    setDown(Down - 1);
+    if (Down <= 0){
+      setDown(4)
+    }
+    return randomInt; //The maximum is exclusive and the minimum is inclusive
+  }
 
   return (
     <div className="container">
@@ -39,7 +71,7 @@ function getRandomInt(min, max) {
 
             <div className="home__score">{Home}</div>
           </div>
-          <div className="timer">15:59</div>
+          <div className="timer">{minutes}:{seconds}</div>
           <div className="away">
             <h2 className="away__name">Tigers</h2>
             <div className="away__score">{Away}</div>
@@ -59,7 +91,7 @@ function getRandomInt(min, max) {
           
         </div>
         <div className="awayButtons">
-          <button onClick={() => ballOn >= 100 ? hitHundred() : setBallOn(ballOn + getRandomInt(0, 50))}className="awayButtons__fieldGoal">Away Field Goal</button>
+          <button onClick={() => ballOn >= 100 ? hitHundred() : setBallOn(ballOn + getRandomInt(0, 20))}className="awayButtons__fieldGoal">Hustle!</button>
         </div>
       </section>
     </div>
