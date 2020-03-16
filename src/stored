@@ -19,7 +19,7 @@ function App() {
  
 function hitHundred(){
   let initialized = setBallOn(50);
-  console.log("TOUCH TOWN!!!!!")
+  console.log("TOUCH TOWN")
   return initialized
 }
 function getRandomInt(min, max) {
