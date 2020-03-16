@@ -28,11 +28,13 @@ function App() {
     
       if (minutes === 0 && seconds === 0){
         setQuater(Quater + 1)
+        setMinutes(15)
+        setSeconds(59)
 
         if (Quater > 4){
-          setQuater(1)
-          setMinutes(15)
-          setSeconds(59)
+          setQuater(99)
+          setMinutes(99)
+          setSeconds(99)
         }
       }
     }
@@ -56,6 +58,11 @@ function App() {
     setDown(Down - 1);
     if (Down <= 0){
       setDown(4)
+    }
+    if (toGo <= 0){
+      setDown(4);
+    }else{
+      console.log("it's other team's chance!")
     }
     return randomInt; //The maximum is exclusive and the minimum is inclusive
   }
